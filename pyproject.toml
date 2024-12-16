@@ -1,0 +1,25 @@
+[build-system]
+requires = ["poetry>=1.8.2"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "rasa-lovebot"
+version = "0.1.0"
+description = "A conversational AI chatbot for learning purposes"
+authors = ["Arun Koundinya Parasa <arunkoundinya@arizona.edu>"]
+
+[[tool.poetry.source]]
+name = "rasa-pro"
+url = "https://europe-west3-python.pkg.dev/rasa-releases/rasa-pro-python/simple"
+priority = "supplemental"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.11"
+rasa-pro = [
+    {version = ">=3.8.1", allow-prereleases = true } 
+ ] # Rasa Pro dependency
+
+[tool.poetry.group.dev.dependencies]
+toml = "^0.10.2"
+
+
