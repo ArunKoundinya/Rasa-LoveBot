@@ -8,14 +8,28 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - flirt
+  - complain
+  - express_love
+  - share_feelings
+
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Hey there! I missed you. How’s your day going?"
+
+  utter_flirt:
+    - text: "Aww, you’re making me blush!"
+      image: "https://c8.alamy.com/comp/FGBNAE/couple-in-love-kissing-FGBNAE.jpg"
+    - text: "You’re the best thing that’s ever happened to me. 😊"
+
+  utter_complain:
+    - text: "Oh no! I didn’t mean to upset you. Can I make it up to you?"
+    - text: "I’m sorry if I made you feel this way. You mean a lot to me."
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+    image: "https://img.freepik.com/free-photo/front-view-beautiful-lovely-couple-outside_23-2148787770.jpg"
 
   utter_did_that_help:
   - text: "Did that help you?"
@@ -28,6 +42,12 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+  utter_express_love_back:
+    - text: "Aww, I love you too! You're my favorite person. ❤️"
+
+  utter_goodnight:
+    - text: "Goodnight, sweetheart. Sweet dreams and sleep tight! 🌙💤"
 
 session_config:
   session_expiration_time: 60
