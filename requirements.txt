@@ -1,1 +1,101 @@
 poetry
+
+ - link: share_day_details
+
+  share_day_details:
+    description: User wants to talk about their day.
+    steps:
+      - collect: user_feeling
+        description: How the user feels about their day.
+        next:
+          - if: slots.user_feeling == "happy"
+            then:
+              - action: respond_happy_day
+              - link: open_ended_chat
+          - if: slots.user_feeling == "sad"
+            then:
+              - action: cheer_user_up
+              - link: open_ended_chat
+          - else:
+              - action: offer_support
+              - link: open_ended_chat
+
+  open_ended_chat:
+    description: handle interactions with the user that are not task-oriented
+    name: pattern chitchat
+    steps:
+      - action: utter_free_chitchat_response 
+
+
+
+        user_feeling:
+    type: text
+    mappings:
+      - type: from_llm
+        initial_value: "neutral"  # Optional initial value for testing
+
+
+
+
+  utter_collect_user_feeling:
+    - text: "How are you feeling today? 😊"
+
+  utter_respond_happy_day:
+    - text: "That's amazing to hear! Tell me more about what made your day so great. 🌟"
+    - text: "Yay! Happiness looks good on you. 😊 What’s the highlight of your day?"
+
+  utter_cheer_user_up:
+    - text: "I'm here for you. Let’s talk about what’s bothering you. ❤️"
+    - text: "Oh no, let me cheer you up with a virtual hug! 🤗 What's going on?"
+
+  utter_offer_support:
+    - text: "It sounds like you have a lot on your mind. Let’s work through it together."
+    - text: "I’m listening. Tell me what’s on your heart. 💬"
+
+
+
+version: "3.1"
+
+slots:
+  recipient:
+    type: text
+    mappings:
+      - type: from_llm
+  amount:
+    type: float
+    mappings:
+      - type: from_llm
+
+responses:
+  utter_ask_recipient:
+    - text: "Who would you like to send money to?"
+
+  utter_ask_amount:
+    - text: "How much money would you like to send?"
+
+  utter_transfer_complete:
+    - text: "All done. {amount} has been sent to {recipient}."
+
+  utter_free_chitchat_response:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant built with Rasa.
+          The assistant can help the user transfer money.
+          The assistant is helpful, creative, clever, and very friendly.
+          The user is making small talk, and the assistant should respond, keeping things light.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
+
+
+flows:
+  transfer_money:
+    description: Help users send money to friends and family.
+    steps:
+      - collect: recipient
+      - collect: amount
+        description: the number of US dollars to send
+      - action: utter_transfer_complete
