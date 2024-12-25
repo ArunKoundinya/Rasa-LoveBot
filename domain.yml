@@ -1,51 +1,54 @@
 version: "3.1"
 
-slots:
-  feeling:
-    type: text
-    mappings:
-      - type: from_llm
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - flirt
+  - complain
+  - express_love
+  - share_feelings
+
 
 responses:
-  utter_ask_feeling:
-    - text: "Hi there! 😊 How are you feeling today? 💕"
+  utter_greet:
+  - text: "Hey there! I missed you. How’s your day going?"
 
-  utter_respond_happy_day:
-    - text: "That's amazing to hear! Tell me more about what made your day so great. 🌟"
-    - text: "Yay! Happiness looks good on you. 😊 What’s the highlight of your day?"
+  utter_flirt:
+    - text: "Aww, you’re making me blush!"
+      image: "https://c8.alamy.com/comp/FGBNAE/couple-in-love-kissing-FGBNAE.jpg"
+    - text: "You’re the best thing that’s ever happened to me. 😊"
 
-  utter_cheer_user_up:
-    - text: "I'm here for you. Let’s talk about what’s bothering you. ❤️"
-    - text: "Oh no, let me cheer you up with a virtual hug! 🤗 What's going on?"
+  utter_complain:
+    - text: "Oh no! I didn’t mean to upset you. Can I make it up to you?"
+    - text: "I’m sorry if I made you feel this way. You mean a lot to me."
 
-  utter_offer_support:
-    - text: "It sounds like you have a lot on your mind. Let’s work through it together."
-    - text: "I’m listening. Tell me what’s on your heart. 💬"
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://img.freepik.com/free-photo/front-view-beautiful-lovely-couple-outside_23-2148787770.jpg"
 
-  utter_free_chitchat_response:
-    - text: "continues the chat based on the user feeling and previous bot response and consequent user responses"
-      metadata:
-        rephrase: True
-        rephrase_prompt: |
-          The following is a conversation with an AI assistant built with Rasa.
-          The assistant can help the user share intimate conversation with Rasa bot.
-          The assistant is helpful, creative, clever, and very friendly.
-          The user is making small talk, and the assistant should respond, keeping things light.
-          Context / previous conversation with the user:
-          {{history}}
-          {{current_input}}
-          Suggested AI Response:
+  utter_did_that_help:
+  - text: "Did that help you?"
 
-  utter_can_do_something_else:
-    - text: "continues the chat based on the user feeling and previous bot response and consequent user responses"
-      metadata:
-        rephrase: True
-        rephrase_prompt: |
-          The following is a conversation with an AI assistant built with Rasa.
-          The assistant can help the user share intimate conversation with Rasa bot.
-          The assistant is helpful, creative, clever, and very friendly.
-          The user is making small talk, and the assistant should respond, keeping things light.
-          Context / previous conversation with the user:
-          {{history}}
-          {{current_input}}
-          Suggested AI Response:
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_express_love_back:
+    - text: "Aww, I love you too! You're my favorite person. ❤️"
+
+  utter_goodnight:
+    - text: "Goodnight, sweetheart. Sweet dreams and sleep tight! 🌙💤"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
